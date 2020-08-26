@@ -1,0 +1,36 @@
+{
+  "name": "react-use-infinite-scroll-list",
+  "version": "0.0.1",
+  "description": "react utility hooks - Infinite scroll list",
+  "keywords": [
+    "react",
+    "hooks",
+    "infinite scroll"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:amati/react-use-infinite-scroll-list.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amati/react-use-infinite-scroll-list/issues",
+    "email": "preserde@gmail.com"
+  },
+  "homepage": "https://github.com/amati/react-use-infinite-scroll-list#readme",
+  "author": "amati <preserde@gmail.com",
+  "license": "MIT",
+  "main": "src/index.js",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "intersection-observer": "^0.11.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "prettier": "2.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
