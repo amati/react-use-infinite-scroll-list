@@ -16,11 +16,11 @@
     "email": "preserde@gmail.com"
   },
   "homepage": "https://github.com/amati/react-use-infinite-scroll-list#readme",
-  "author": "amati <preserde@gmail.com",
+  "author": "amati <preserde@gmail.com> (https://amati.io/)",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">= 16.8.x"
   },
   "dependencies": {
     "intersection-observer": "^0.11.0"
@@ -28,9 +28,32 @@
   "devDependencies": {
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.4",
-    "prettier": "2.1.1"
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-amati": "^1.0.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-html": "^6.0.3",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "prettier": "^2.1.1",
+    "prettier-config-amati": "^1.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
+  "prettier": "prettier-config-amati",
   "scripts": {
+    "build": "webpack --mode production",
+    "develop": "webpack --watch --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
