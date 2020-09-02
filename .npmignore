@@ -49,3 +49,4 @@ examples
 # etc
 .vscode
 .github
+webpack.config.js
