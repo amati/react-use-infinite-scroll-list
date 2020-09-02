@@ -1,1 +1,2 @@
-export { default } from './use-infinite-scroll-list';
+import useInfiniteScrollList from './use-infinite-scroll-list';
+export default useInfiniteScrollList;
