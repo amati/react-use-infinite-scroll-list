@@ -36,8 +36,9 @@ examples
 # project
 .babelrc
 .editorconfig
-.gitattributes
-.gitignore
+.eslintrc.jscoverage
+.git*
+.prettier*
 
 # OS specific files
 **/._*

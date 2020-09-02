@@ -68,3 +68,6 @@ typings/
 
 # TernJS port file
 .tern-port
+
+# build
+dist
