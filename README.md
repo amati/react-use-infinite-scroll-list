@@ -2,13 +2,13 @@
 
 React hooks - Infinite Scroll List powered by `IntersectionObserver`
 
-## Install
+## 🎊 Install
 
 ```shell
 npm install react-use-infinite-scroll-list
 ```
 
-## Usage
+## 📝 Usage
 
 ```js
 import useInfiniteScrollList from 'react-use-infinite-scroll-list';
@@ -66,7 +66,7 @@ const YOUR_COMPONENT = () => {
 };
 ```
 
-### Props
+### 🔧 Props
 
 - `init` : a callback function to fetch first-page data. you should return a Promise resolve with `isDone` value.
 - `more` : a callback function to fetch more data when scrolling to the end of list. you should return a Promise resolve with `isDone` value.
