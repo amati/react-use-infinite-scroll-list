@@ -1,6 +1,6 @@
 {
   "name": "react-use-infinite-scroll-list",
-  "version": "0.0.1-dev2",
+  "version": "0.0.2-dev2",
   "description": "react utility hooks - Infinite scroll list",
   "keywords": [
     "react",
@@ -26,13 +26,14 @@
     "intersection-observer": "^0.11.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.4",
-    "@babel/preset-env": "^7.11.0",
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
-    "eslint": "^7.7.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-amati": "^1.0.1",
     "eslint-config-prettier": "^6.11.0",
@@ -52,8 +53,8 @@
   },
   "prettier": "prettier-config-amati",
   "scripts": {
-    "build": "webpack --mode production",
-    "develop": "webpack --watch --mode development",
+    "build": "cross-env NODE_ENV=production webpack",
+    "develop": "cross-env NODE_ENV=development webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

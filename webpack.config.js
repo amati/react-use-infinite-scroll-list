@@ -1,14 +1,20 @@
+const webpack = require('webpack');
 const path = require('path');
 
+/*
+if use UMD target, cannot build on gatsby
+*/
+
 module.exports = {
+  mode: process.env.NODE_ENV,
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    library: 'useToggle',
-    libraryTarget: 'umd',
+    library: 'useInfiniteScrollList',
+    libraryTarget: 'amd',
   },
-  devtool: 'source-map',
+  plugins: [new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) })],
   module: {
     rules: [
       {
@@ -24,6 +30,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'source-map',
   externals: {
     react: 'react',
   },

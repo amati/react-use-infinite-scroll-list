@@ -11,32 +11,11 @@ const defaultLoadingElement = (
       justifyContent: 'center',
     }}>
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
-      <style>{`
-        .loading_spinner circle {
-          transform-origin: 15px 15px;
-          animation: animationStroke 1s linear infinite, animationTransform 1s linear infinite;
+      <style>
+        {
+          '.loading_spinner circle{transform-origin: 15px 15px; animation: animationStroke 1s linear infinite, animationTransform 1s linear infinite}@keyframes animationStroke { 0%, 100% {stroke-dasharray: 0, 80;} 50% {stroke-dasharray: 70, 80;}} @keyframes animationTransform { 0% {transform: rotate(0);} 50% {transform: rotate(320deg);} 100% {transform: rotate(720deg);}}'
         }
-        @keyframes animationStroke {
-          0%,
-          100% {
-            stroke-dasharray: 0, 80;
-          }
-          50% {
-            stroke-dasharray: 70, 80;
-          }
-        }
-        @keyframes animationTransform {
-          0% {
-            transform: rotate(0);
-          }
-          50% {
-            transform: rotate(320deg);
-          }
-          100% {
-            transform: rotate(720deg);
-          }
-        }
-        `}</style>
+      </style>
       <circle
         cx="15"
         cy="15"
@@ -70,46 +49,52 @@ const defaultLoadingElement = (
 
 export default ({ init, more, loadingElement = defaultLoadingElement }) => {
   const [endOfList, setEndOfList] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [isFetching, setFetching] = useState(false);
+  const [isDone, setDone] = useState(false);
+  const [isInit, setInit] = useState(false);
 
   const observer = useRef();
+  let currentObserver;
 
+  // init
   useEffect(() => {
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isFetching) {
-            setIsFetching(true);
+            setFetching(true);
           }
         });
       },
       {
         threshold: 1,
-        rootMargin: '0px 0px 50px',
+        rootMargin: '0px 0px 75px',
       },
     );
 
-    async function fetchInit() {
+    async function fetchInitAndStartObserve() {
       const result = await init();
-      setIsDone(result.isDone);
+      setInit(true);
+      setDone(result.isDone);
     }
-    fetchInit();
+    fetchInitAndStartObserve();
   }, []);
 
+  // start observe for fetch more
   useEffect(() => {
-    const currentObserver = observer.current;
-    endOfList && currentObserver.observe(endOfList);
+    currentObserver = observer.current;
+    endOfList && isInit && currentObserver.observe(endOfList);
     return () => {
       endOfList && currentObserver.unobserve(endOfList);
     };
-  }, [endOfList]);
+  }, [isInit, endOfList]);
 
+  // fetch more
   useEffect(() => {
     async function fetchMore() {
       const result = await more();
-      setIsDone(result.isDone);
-      setIsFetching(false);
+      setDone(result.isDone);
+      setFetching(false);
     }
     if (isFetching && !isDone) {
       fetchMore();
