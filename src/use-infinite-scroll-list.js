@@ -11,32 +11,11 @@ const defaultLoadingElement = (
       justifyContent: 'center',
     }}>
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
-      <style>{`
-        .loading_spinner circle {
-          transform-origin: 15px 15px;
-          animation: animationStroke 1s linear infinite, animationTransform 1s linear infinite;
+      <style>
+        {
+          '.loading_spinner circle{transform-origin: 15px 15px; animation: animationStroke 1s linear infinite, animationTransform 1s linear infinite}@keyframes animationStroke { 0%, 100% {stroke-dasharray: 0, 80;} 50% {stroke-dasharray: 70, 80;}} @keyframes animationTransform { 0% {transform: rotate(0);} 50% {transform: rotate(320deg);} 100% {transform: rotate(720deg);}}'
         }
-        @keyframes animationStroke {
-          0%,
-          100% {
-            stroke-dasharray: 0, 80;
-          }
-          50% {
-            stroke-dasharray: 70, 80;
-          }
-        }
-        @keyframes animationTransform {
-          0% {
-            transform: rotate(0);
-          }
-          50% {
-            transform: rotate(320deg);
-          }
-          100% {
-            transform: rotate(720deg);
-          }
-        }
-        `}</style>
+      </style>
       <circle
         cx="15"
         cy="15"
@@ -86,7 +65,7 @@ export default ({ init, more, loadingElement = defaultLoadingElement }) => {
       },
       {
         threshold: 1,
-        rootMargin: '0px 0px 50px',
+        rootMargin: '0px 0px 75px',
       },
     );
 
