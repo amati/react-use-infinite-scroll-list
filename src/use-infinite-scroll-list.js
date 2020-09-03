@@ -13,7 +13,7 @@ const defaultLoadingElement = (
     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30">
       <style>
         {
-          '.loading_spinner circle{transform-origin: 15px 15px; animation: animationStroke 1s linear infinite, animationTransform 1s linear infinite}@keyframes animationStroke { 0%, 100% {stroke-dasharray: 0, 80;} 50% {stroke-dasharray: 70, 80;}} @keyframes animationTransform { 0% {transform: rotate(0);} 50% {transform: rotate(320deg);} 100% {transform: rotate(720deg);}}'
+          '.loading_spinner circle{transform-origin: 15px 15px; animation: animationStroke 1s linear infinite, animationTransform 1s linear infinite} @keyframes animationStroke { 0%, 100% {stroke-dasharray: 0, 80;} 50% {stroke-dasharray: 70, 80;}} @keyframes animationTransform { 0% {transform: rotate(0);} 50% {transform: rotate(320deg);} 100% {transform: rotate(720deg);}}'
         }
       </style>
       <circle
@@ -74,13 +74,13 @@ export default ({ init, more, loadingElement = defaultLoadingElement }) => {
 
     async function fetchInitAndStartObserve() {
       const result = await init();
-      setInit(true);
+      !result.isDone && setInit(true);
       setDone(result.isDone);
     }
     fetchInitAndStartObserve();
   }, []);
 
-  // start observe for fetch more
+  // start observe when after init()
   useEffect(() => {
     currentObserver = observer.current;
     endOfList && isInit && currentObserver.observe(endOfList);
