@@ -49,17 +49,20 @@ const defaultLoadingElement = (
 
 export default ({ init, more, loadingElement = defaultLoadingElement }) => {
   const [endOfList, setEndOfList] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [isFetching, setFetching] = useState(false);
+  const [isDone, setDone] = useState(false);
+  const [isInit, setInit] = useState(false);
 
   const observer = useRef();
+  let currentObserver;
 
+  // init
   useEffect(() => {
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isFetching) {
-            setIsFetching(true);
+            setFetching(true);
           }
         });
       },
@@ -69,26 +72,29 @@ export default ({ init, more, loadingElement = defaultLoadingElement }) => {
       },
     );
 
-    async function fetchInit() {
+    async function fetchInitAndStartObserve() {
       const result = await init();
-      setIsDone(result.isDone);
+      setInit(true);
+      setDone(result.isDone);
     }
-    fetchInit();
+    fetchInitAndStartObserve();
   }, []);
 
+  // start observe for fetch more
   useEffect(() => {
-    const currentObserver = observer.current;
-    endOfList && currentObserver.observe(endOfList);
+    currentObserver = observer.current;
+    endOfList && isInit && currentObserver.observe(endOfList);
     return () => {
       endOfList && currentObserver.unobserve(endOfList);
     };
-  }, [endOfList]);
+  }, [isInit, endOfList]);
 
+  // fetch more
   useEffect(() => {
     async function fetchMore() {
       const result = await more();
-      setIsDone(result.isDone);
-      setIsFetching(false);
+      setDone(result.isDone);
+      setFetching(false);
     }
     if (isFetching && !isDone) {
       fetchMore();
