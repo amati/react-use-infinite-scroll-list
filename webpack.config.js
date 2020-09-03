@@ -12,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
     library: 'useInfiniteScrollList',
-    // libraryTarget: 'umd',
+    libraryTarget: 'amd',
   },
   plugins: [new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) })],
   module: {
